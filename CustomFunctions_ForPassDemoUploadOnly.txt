@@ -1,0 +1,31 @@
+(text) => let
+    apikey      = "Enter your API Key Here",
+    endpoint    = "Enter your API endpoint here",
+    jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
+    jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
+    bytesbody   = Text.ToBinary(jsonbody),
+    headers     = [#"Ocp-Apim-Subscription-Key" = apikey],
+    bytesresp   = Web.Contents(endpoint, [Headers=headers, Content=bytesbody]),
+    jsonresp    = Json.Document(bytesresp),
+    keyphrases  = Text.Lower(Text.Combine(jsonresp[documents]{0}[keyPhrases], ", "))
+in  keyphrases
+
+
+
+(text) => let
+    apikey      = "Enter your API Key Here",
+    endpoint    = "Enter your API endpoint here",
+    jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
+    jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext & " } ] }",
+    bytesbody   = Text.ToBinary(jsonbody),
+    headers     = [#"Ocp-Apim-Subscription-Key" = apikey],
+    bytesresp   = Web.Contents(endpoint, [Headers=headers, Content=bytesbody]),
+    jsonresp    = Json.Document(bytesresp),
+    sentiment   = jsonresp[documents]{0}[score]
+in  sentiment
+
+
+
+## Please note that you may have to go into File > Options and Settings > Data Source Settings >
+> Then Set Privacy Level to "Public" for all 3
+> Set Credentials to Anonymous for the APIs
