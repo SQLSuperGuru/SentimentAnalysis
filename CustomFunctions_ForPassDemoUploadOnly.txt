@@ -1,4 +1,4 @@
-(text) => let
+= (text) => let
     apikey      = "Enter your API Key Here",
     endpoint    = "Enter your API endpoint here",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
@@ -12,7 +12,7 @@ in  keyphrases
 
 
 
-(text) => let
+= (text) => let
     apikey      = "Enter your API Key Here",
     endpoint    = "Enter your API endpoint here",
     jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
